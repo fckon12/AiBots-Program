@@ -1,0 +1,13 @@
+const fs = require('fs');
+
+let tradeData = [];
+
+async function saveTradeData(direction, quantity, lastPrice) {
+  tradeData.push({
+    timestamp: moment().format(),
+    direction: direction,
+    quantity: quantity,
+    price: lastPrice
+  });
+  fs.writeFileSync('tradeData.json', JSON.stringify(tradeData));
+}

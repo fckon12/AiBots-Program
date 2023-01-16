@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "binance": "^2.2.10",
+    "canvas": "^2.11.0",
     "ccxt": "^2.5.52",
+    "chart.js": "^4.1.2",
     "delay": "^5.0.0",
     "moment": "^2.29.4"
   }

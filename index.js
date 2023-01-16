@@ -1,6 +1,7 @@
 const ccxt = require('ccxt');
 const moment = require('moment');
 const delay = require('delay');
+//const Chart = require('chart.js');
 
 binance = new ccxt.binance({
     apiKey: 'q9sSUaMViMlu6BeOT9Qrx3WstpFLmZoGKHwPEFYZrLEzTcp534ifwxS9VobzUcYB',
@@ -13,7 +14,7 @@ async function printBalance(btcPrice) {
   const total = balance.total;
   console.log(`Balance : BTC ${total.BTC}, USDT: ${total.USDT}`);
   console.log(`Total USDT : ${(total.BTC - 1) * btcPrice + total.USDT}.\n`);
-  console.log(balance);
+  
 }
 
 async function tick() {
@@ -28,6 +29,7 @@ async function tick() {
       volume: price[5],
     };
   });
+  
   const averagePrice = bPrices.reduce((acc, price) => acc + price.close, 0) / 5;
   const lastPrice = bPrices[bPrices.length - 1].close;
 
@@ -41,8 +43,13 @@ async function tick() {
   console.log(`Average price : ${averagePrice}. Last price: ${lastPrice}`);
   const order = await binance.createMarketOrder('BTC/USDT', direction, quantity);
   console.log(`${moment().format()}: ${direction} ${quantity} BTC at ${lastPrice}`);
+  //chartPrices(bPrices);
+  
+
+  //draw(lastPrice); //call the draw function and pass the lastPrice as an argument
+
   //console.log(order);
-  //printBalance(lastPrice);
+  printBalance(lastPrice);
 }
 
 async function main() {
